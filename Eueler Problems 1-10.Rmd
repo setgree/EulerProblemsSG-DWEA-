@@ -17,8 +17,8 @@ Native language for "is result an interger" is does modulus operator return 0.
 ```{r}
 rm(list = ls())
 EulerProblem1<-function(x){
-numbers=1:x
-total=rep(0,x)
+numbers = 1:x
+total = rep(0, x)
 for (i in numbers){
   if(i %% 3 == 0){
     total[i] <-i}
@@ -29,7 +29,16 @@ sum(total)
 return(sum(total))
   }
 
-EulerProblem1(999)  ## 233168, which is correct. Good!
+# Try2 With 11 more months coding 
+EulerProblem1Attempt2 <- function(x){
+numbers <- 1:x ; total = rep(0, x)
+for (i in numbers){
+  if(i %% 3 == 0 | i %% 5 == 0){
+    total[i] = i}}
+return(sum(total))}
+
+EulerProblem1(999) ### 233168, which is correct. Good!
+EulerProblem1Attempt2(999)
 ## Could this have been done faster with sapply? Probably. 
 
 ```
