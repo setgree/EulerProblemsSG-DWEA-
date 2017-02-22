@@ -155,6 +155,32 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 
 Find the largest palindrome made from the product of two 3-digit numbers.
 
+2/22/17 Mark solved it in Excel like this:
+    For i = 9 To 1 Step -1
+    For j = 9 To 0 Step -1
+    For k = 9 To 0 Step -1
+    
+    x = i & j & k & k & j & i
+    
+    For a = 100 To Application.RoundDown(Sqr(x), 0)
+    b = x / a
+    If b <> Round(b, 0) = 0 And Len(b) = 3 Then
+    Cells(1, 1) = x
+    Cells(2, 1) = a
+    Cells(3, 1) = b
+    Exit Sub
+    End If
+    Next a
+    
+    Next k
+    Next j
+    Next i
+
+x=906609
+a=913
+b=993
+So I'm going to code this into R but maybe also try a different way of solving it.
+
 ```{r Palindrome}
 PalindromeFinder <- function(digit){
   # Look up some math theory about finding the max of something.
