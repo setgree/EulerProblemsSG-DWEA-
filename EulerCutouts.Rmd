@@ -1,0 +1,125 @@
+## Euler Problem Cut outs
+
+
+
+```{r}
+# RBLOGGERS SOLUTION IS BEEAUTIFUL
+fibonacci <- numeric()
+fibonacci[1] <- 1
+fibonacci[2] <- 2
+i <- 3
+repeat {
+  fibonacci[i] <- fibonacci[i-1] + fibonacci[i-2]
+  if (fibonacci[i] > 4e6) break
+  i <- i + 1
+}
+repeat(
+  x=5)
+##1: build a fibonacisequence generator
+## one implementation
+
+rm(list=ls())
+fib_one<-function(x){
+  fibvals<-1:x
+  fibvals[1]<-1
+  fibvals[2]<-1
+  for (i in 3:x){
+    fibvals[i]<-fibvals[i-1]+fibvals[i-2]
+  }
+  return(sum(fibvals))
+}
+fib_one(10) #143
+## another
+fib_two<-function(n){
+  if (length(n)>1) return(sapply(n,fib_two)) ## important, I would not have gotten it
+  if (n==1) return(1)
+  if (n==2) return(1)
+  return(fib_two(n-1)+fib_two(n-2))
+}
+fib_two(10) ##55
+fibsum<-function(x){
+  return(sum(fib_two(1:x)))
+}
+fibsum(10)# 143
+
+## two errors worked through, took me a while: I was assigning values to a list with == rather than <- and had to make the function only apply to positive numbers. Otherwise, I got "replacement has length zero"
+## Mine is painfully inefficient in comparison to the above internet solutions!
+## But it's mine, so,that's worth something.
+rm(list=ls())
+fibseqgen<-function(x){
+  results<-1:x
+  fibseq<-rep(0,x)
+  for (i in results){
+    if (i==1) fibseq[i] <- 1
+    if (i==2) fibseq[i] <- 1
+    else if (i>2) fibseq[i]<-fibseq[i-1]+fibseq[i-2]
+  }
+  return(fibseq)}
+results<-fibseqgen(10)
+
+## Whatever! I'm going with mine because I made it
+## but I need to put it down for a minute.
+```
+
+Stopping here for a minute to write about it. I've got functions that return the lists right now. I originally had functions that return the sums of the lists but I don't want that yet because it woul be computationally inefficient to get the sums and then subtract out the odd numbers. So the next two steps are to sum the even numbers, and then to find some way to stop the counting process when the number is high enough. The first part should be pretty straightforward.
+
+I'm having fun with this.
+```{r}
+evenfib<-function(x){
+evenandodd<-fibseqgen(x)
+even<-evenandodd[which(evenandodd %% 2 == 0)]
+for (i in even){
+if (i>4000000){
+break
+}
+}
+return(sum(even))
+}
+evenfib(7) ## 10 which is right
+
+```
+Oh my was I going about this in an overcomplicated way, but I don't understand why i in loop reads 144 as 144 separate values rather than an instance of a list.
+
+The next step is to only include results up to 4*10^6.
+A cheating, non-automated way of doing this would be to just figure out which number generates the result closest to the threshold of 4M.
+No there's a better way! It will look like: if i in even>4000000 break
+That doesn't work
+
+```{r}
+while (fibseqgen[i]<4000000){
+  
+  
+}
+```
+## Problem 3 Scratch 
+#Prime Numbers
+```{r }
+PrimeFactorGen <- function(x){
+  y <- 1:x
+  N <-length(y)
+  all_div <- numeric()
+  for (i in y){
+    if (i == x ) break # must come first if I'm doing it in this order.
+    else if (x %% i == 0) all_div[i] <- i
+  }
+  ## So...how to check if a number is prime? 
+ prime_results <- numeric()
+ is.prime <- function(n) n == 2L || all(n %% 2L:ceiling(sqrt(n)) != 0) #don't get this
+ for (i in all_div){
+  if (is.prime(i)==TRUE){prime_results[i] <- i}
+  else{break}
+}
+ return(tail(prime_results))
+ }
+PrimeFactorGen(5000)
+
+## I'm not good enough at this yet. I need to do some data manipulation practice to get 
+## assigning things, calculating primes, etc.
+
+
+## Does this work?
+is.prime <- function(n) n == 2L || all(n %% 2L:ceiling(sqrt(n)) != 0)
+?floor
+is.prime(5)
+?ceiling
+```
