@@ -43,16 +43,19 @@ EulerProblem1Attempt2(999)
 
 
 # Try 3 in 2019
-numbers  <- 0
+numbers  <- 0 # initialize vector # and write in space shuttle style my man
 for(i in 1:999){
   if(i %% 3 == 0 | i %% 5 == 0){
 numbers <- numbers + i    
   }
 }
 numbers # 233168 -- nice and simple
+# R with a C accent this is but hey, it's for learning
 
 # ok let's actually try lapply. There's no reason this won't work as nicely.
 
+# answer <- lapply(1:999, function(x) if(x %% 3 == 0 | x %% 5 == 0){numbers <- numbers + x} ) 
+# I don't know, not gonna dig in right now 2/4/19
 ```
 
 ### Euler Problem 2
