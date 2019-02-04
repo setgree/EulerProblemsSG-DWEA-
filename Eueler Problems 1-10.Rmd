@@ -41,6 +41,18 @@ EulerProblem1(999) ### 233168, which is correct. Good!
 EulerProblem1Attempt2(999)
 ## Could this have been done faster with sapply? Probably. 
 
+
+# Try 3 in 2019
+numbers  <- 0
+for(i in 1:999){
+  if(i %% 3 == 0 | i %% 5 == 0){
+numbers <- numbers + i    
+  }
+}
+numbers # 233168 -- nice and simple
+
+# ok let's actually try lapply. There's no reason this won't work as nicely.
+
 ```
 
 ### Euler Problem 2
